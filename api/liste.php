@@ -34,6 +34,10 @@
     </nav>
 </header>
 <main>
+    <div>
+        <h2>Liste d'anticorps</h2>
+        <button><a href="./ajouter.php">Ajouter un anticorps</a></button>
+    </div>
    <table>
        <thead>
            <tr>
