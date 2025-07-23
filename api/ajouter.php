@@ -1,3 +1,35 @@
+<?php
+
+require_once '../connect.php';
+
+/* Variables */
+
+global $db;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+    $ab_name = $_POST['ab_name'];
+    $fluo = $_POST['fluo'];
+    $catalogue = $_POST['catalogue'];
+    $fournisseur = $_POST['fournisseur'];
+    $volume = $_POST['volume'];
+
+    $newAbQuery = $db->prepare('INSERT INTO antibody (NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial) VALUES (:NomAnticorps, :Fluorophore, :NuméroCatalogue, :Fournisseur, :VolumeInitial)');
+    $newAbQuery->execute([
+            'NomAnticorps' => $ab_name,
+            'Fluorophore' => $fluo,
+            'NuméroCatalogue' => $catalogue,
+            'Fournisseur' => $fournisseur,
+            'VolumeInitial' => $volume]);
+
+    header('Location: success.php');
+    exit;
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,9 +72,9 @@
     <div>
         <form action="#" method="post">
             <div>
-                <label for="ab-name">Nom de l'anticorps</label>
+                <label for="ab_name">Nom de l'anticorps</label>
                 <br>
-                <input type="text" name="ab-name" id="ab-name" placeholder="Nom de l'anticorps" required/>
+                <input type="text" name="ab_name" id="ab_name" placeholder="Nom de l'anticorps" required/>
             </div>
             <div>
                 <label for="fluo">Fluorophore</label>
