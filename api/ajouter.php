@@ -12,14 +12,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $catalogue = $_POST['catalogue'];
     $fournisseur = $_POST['fournisseur'];
     $volume = $_POST['volume'];
+    $restant = $_POST['restant'];
 
-    $newAbQuery = $db->prepare('INSERT INTO antibody (NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial) VALUES (:NomAnticorps, :Fluorophore, :NuméroCatalogue, :Fournisseur, :VolumeInitial)');
+    $newAbQuery = $db->prepare('INSERT INTO antibody (NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant) VALUES (:NomAnticorps, :Fluorophore, :NuméroCatalogue, :Fournisseur, :VolumeInitial, :VolumeRestant)');
     $newAbQuery->execute([
             'NomAnticorps' => $ab_name,
             'Fluorophore' => $fluo,
             'NuméroCatalogue' => $catalogue,
             'Fournisseur' => $fournisseur,
-            'VolumeInitial' => $volume]);
+            'VolumeInitial' => $volume,
+            'VolumeRestant' => $restant]);
 
     header('Location: success.php');
     exit;
@@ -95,6 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
                 <label for="volume">Volume initial (uL)</label>
                 <br>
                 <input type="text" name="volume" id="volume" placeholder="Volume initial" required/>
+            </div>
+            <div>
+                <label for="restant">Volume restant (uL)</label>
+                <br>
+                <input type="text" name="restant" id="restant" placeholder="Volume initial" required/>
             </div>
             <div>
                 <label for="submit"></label>
