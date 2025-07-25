@@ -1,3 +1,37 @@
+<?php
+
+require_once '../connect.php';
+
+/* Variables */
+
+global $db;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+    $ab_name = $_POST['ab_name'];
+    $fluo = $_POST['fluo'];
+    $catalogue = $_POST['catalogue'];
+    $fournisseur = $_POST['fournisseur'];
+    $volume = $_POST['volume'];
+    $restant = $_POST['restant'];
+
+    $newAbQuery = $db->prepare('INSERT INTO antibody (NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant) VALUES (:NomAnticorps, :Fluorophore, :NuméroCatalogue, :Fournisseur, :VolumeInitial, :VolumeRestant)');
+    $newAbQuery->execute([
+            'NomAnticorps' => $ab_name,
+            'Fluorophore' => $fluo,
+            'NuméroCatalogue' => $catalogue,
+            'Fournisseur' => $fournisseur,
+            'VolumeInitial' => $volume,
+            'VolumeRestant' => $restant]);
+
+    header('Location: success.php');
+    exit;
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,9 +74,9 @@
     <div>
         <form action="#" method="post">
             <div>
-                <label for="ab-name">Nom de l'anticorps</label>
+                <label for="ab_name">Nom de l'anticorps</label>
                 <br>
-                <input type="text" name="ab-name" id="ab-name" placeholder="Nom de l'anticorps" required/>
+                <input type="text" name="ab_name" id="ab_name" placeholder="Nom de l'anticorps" required/>
             </div>
             <div>
                 <label for="fluo">Fluorophore</label>
@@ -63,6 +97,11 @@
                 <label for="volume">Volume initial (uL)</label>
                 <br>
                 <input type="text" name="volume" id="volume" placeholder="Volume initial" required/>
+            </div>
+            <div>
+                <label for="restant">Volume restant (uL)</label>
+                <br>
+                <input type="text" name="restant" id="restant" placeholder="Volume initial" required/>
             </div>
             <div>
                 <label for="submit"></label>

@@ -46,14 +46,10 @@
                <th>#Catalogue</th>
                <th>Fournisseur</th>
                <th>Volume Initiale</th>
-               <th>% Restant</th>
-               <th>Stock</th>
            </tr>
        </thead>
        <tbody>
         <tr>
-            <td>test</td>
-            <td>test</td>
             <td>test</td>
             <td>test</td>
             <td>test</td>
