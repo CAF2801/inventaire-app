@@ -1,3 +1,16 @@
+<?php
+
+require_once "../connect.php";
+
+global $db;
+
+$sql = "SELECT id, NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant FROM antibody";
+
+$result = $db->query($sql);
+
+$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -38,26 +51,47 @@
         <h2>Liste d'anticorps</h2>
         <button><a href="./ajouter.php">Ajouter un anticorps</a></button>
     </div>
-   <table>
-       <thead>
-           <tr>
-               <th>Nom Ac</th>
-               <th>Fluorophore</th>
-               <th>#Catalogue</th>
-               <th>Fournisseur</th>
-               <th>Volume Initiale</th>
-           </tr>
-       </thead>
-       <tbody>
-        <tr>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-            <td>test</td>
-        </tr>
-       </tbody>
-   </table>
+    <?php
+
+    if ($result === FALSE) {
+        echo "Erreur de la requête SQL : " . $db->error;
+    } elseif (count($rows) > 0) {
+        echo "<table>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>ID</th>";
+        echo "<th>Nom Ac</th>";
+        echo "<th>Fluorophore</th>";
+        echo "<th>#Catalogue</th>";
+        echo "<th>Fournisseur</th>";
+        echo "<th>Volume Initial</th>";
+        echo "<th>Volume restant</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+
+
+
+        foreach ($rows as $row) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['NomAnticorps']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['Fluorophore']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['NuméroCatalogue']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['Fournisseur']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['VolumeInitial']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['VolumeRestant']) . "</td>";
+            echo "</tr>";
+        }
+        echo "</tbody>";
+        echo "</table>";
+
+    } else {
+        echo "Aucun anticorps trouvé dans la table";
+    }
+
+    $db = null;
+   ?>
 </main>
 <footer>
     <div>
