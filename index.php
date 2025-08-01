@@ -44,16 +44,9 @@
             <button><a href="./api/liste.php">Allez vers votre inventaire -></a></button>
         </div>
     </main>
-    <footer>
-        <div>
-            copyright CAF @ 2025
-        </div>
-        <div>
-            Mon github
-            <div>
-                <img src="#" alt="github">
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+
+    <?php
+
+    require_once "./partials/_footer.php";
+
+    ?>

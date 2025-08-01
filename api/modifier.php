@@ -1,6 +1,6 @@
 <?php
 
-require_once "../connect.php";
+require_once "../data/connect.php";
 
 global $db;
 
@@ -113,16 +113,7 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
 </main>
-<footer>
-    <div>
-        copyright CAF @ 2025
-    </div>
-    <div>
-        Mon github
-        <div>
-            <img src="#" alt="github">
-        </div>
-    </div>
-</footer>
-</body>
-</html>
+<?php
+
+require_once "../partials/_footer.php";
+?>

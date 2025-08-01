@@ -1,6 +1,6 @@
 <?php
 
-require_once '../connect.php';
+require_once "../data/connect.php";
 
 /* Variables */
 
@@ -111,16 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         </form>
     </div>
 </main>
-<footer>
-    <div>
-        copyright CAF @ 2025
-    </div>
-    <div>
-        Mon github
-        <div>
-            <img src="#" alt="github">
-        </div>
-    </div>
-</footer>
-</body>
-</html>
+<?php
+
+require_once "../partials/_footer.php";
+?>
