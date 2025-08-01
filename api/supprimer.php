@@ -1,3 +1,30 @@
+<?php
+
+require_once "../connect.php";
+
+global $db;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+    $ab_name = $_POST['ab-name'];
+    $fluo = $_POST['fluo'];
+
+
+    $new_delete_query = $db->prepare('DELETE FROM antibody  WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
+    $new_delete_query->execute([
+        'NomAnticorps' => $ab_name,
+        'Fluorophore' => $fluo]);
+
+    header('Location: success.php');
+    exit;
+}
+
+$sql_select = "SELECT NomAnticorps, Fluorophore FROM antibody";
+
+$select_result = $db->query($sql_select);
+
+$rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,11 +67,37 @@
     <div>
         <form action="#" method="post">
             <div>
-                <label for="ab-name">Nom de l'anticorps</label>
-                <br>
-                <select name="ab-name" id="ab-name" required>
-                    <option value="test">test</option>
-                </select>
+                <?php
+
+                if ($select_result === FALSE) {
+                    echo "Erreur de la requête SQL : " . $db->error;
+                } elseif (count($rows) > 0) {
+                    echo "<label for='ab-name'>Nom de l'anticorps</label>";
+                    echo "<br>";
+                    echo "<select name='ab-name' id='ab-name' required>";
+
+
+                    foreach ($rows as $row) {
+                        $value = htmlspecialchars($row['NomAnticorps']);
+                        echo "<option value=\"$value\">$value</option>";
+                    }
+
+                    echo '</select><br><br>';
+                    echo "<label for='fluo'>Fluorophore</label>";
+                    echo "<br>";
+                    echo "<select name='fluo' id='fluo' required>";
+
+                    foreach ($rows as $row) {
+                        $value_fluo = htmlspecialchars($row['Fluorophore']);
+                        echo "<option value=\"$value_fluo\">$value_fluo</option>";
+                    }
+
+                } else {
+                    echo "Aucun anticorps trouvé dans la table";
+                }
+
+                $db = null;
+                ?>
             </div>
             <div>
                 <label for="submit"></label>
