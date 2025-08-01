@@ -52,7 +52,7 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         <button><a href="./ajouter.php">Ajouter un anticorps</a></button>
     </div>
     <?php
-
+    global $result;
     if ($result === FALSE) {
         echo "Erreur de la requête SQL : " . $db->error;
     } elseif (count($rows) > 0) {
@@ -89,7 +89,7 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     } else {
         echo "Aucun anticorps trouvé dans la table";
     }
-
+    $result = null;
     $db = null;
    ?>
 </main>
