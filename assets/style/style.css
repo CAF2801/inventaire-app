@@ -1,0 +1,83 @@
+
+:root {
+    --black: #000;
+    --white: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font: 400 100%/150% "Lato", sans-serif !important;
+}
+
+h1 {
+    display: none;
+}
+
+h2, h3 {
+    font-family: "Open Sans", sans-serif !important;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40rem;
+}
+
+li {
+    margin-right: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--black);
+}
+
+main {
+    min-height: 73vh;
+}
+
+#main-title {
+    margin-top: 2rem;
+}
+
+#hero-banner {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#inventory-button {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#foot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foot-item {
+    margin-right: 1rem;
+}
