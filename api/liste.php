@@ -24,8 +24,8 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <h1>Inventaire-App</h1>
 <header>
-    <div>
-        <h3><a href="../index.php">Inventaire-App</a></h3>
+    <div id="main-title">
+        <h2><a href="../index.php">Inventaire-App</a></h2>
     </div>
     <nav>
         <ul>
@@ -45,10 +45,11 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 </header>
 <main>
-    <div>
+    <div id="list-title-container">
         <h2>Liste d'anticorps</h2>
-        <button><a href="./ajouter.php">Ajouter un anticorps</a></button>
+        <a href="./ajouter.php">Ajouter un anticorps</a>
     </div>
+    <div id="ab-table">
     <?php
     global $result;
     if ($result === FALSE) {
@@ -90,6 +91,7 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     $result = null;
     $db = null;
    ?>
+    </div>
 </main>
 <?php
 

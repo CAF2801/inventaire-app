@@ -33,13 +33,13 @@
     </header>
     <main>
         <section id="hero-banner">
-            <img src="https://placehold.co/600x400" alt="Image d'un anticorps">
+            <img src="./assets/img/antibody_image_chatgpt.png" alt="Image d'un anticorps" id="ab-image">
         </section>
         <div id="welcome">
             <h3>Bienvenue sur Inventaire-App</h3>
         </div>
         <div id="inventory-button">
-            <button><a href="./api/liste.php">Allez vers votre inventaire -></a></button>
+            <a href="./api/liste.php">Allez vers votre inventaire -></a>
         </div>
     </main>
 

@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 <body>
 <h1>Inventaire-App</h1>
 <header>
-    <div>
-        <h3><a href="../index.php">Inventaire-App</a></h3>
+    <div id="main-title">
+        <h2><a href="../index.php">Inventaire-App</a></h2>
     </div>
     <nav>
         <ul>
@@ -66,45 +66,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     </nav>
 </header>
 <main>
-    <div>
-        <h2>Modifier un anticorps</h2>
+    <div id="add-title-container">
+        <h2>Ajouter un anticorps</h2>
     </div>
-    <div>
+    <div class="form-container">
         <form action="#" method="post">
-            <div>
+            <div class="input-container">
                 <label for="ab_name">Nom de l'anticorps</label>
                 <br>
-                <input type="text" name="ab_name" id="ab_name" placeholder="Nom de l'anticorps" required/>
+                <input class="text-input" type="text" name="ab_name" id="ab_name" placeholder="Nom de l'anticorps" required/>
             </div>
-            <div>
+            <div class="input-container">
                 <label for="fluo">Fluorophore</label>
                 <br>
-                <input type="text" name="fluo" id="fluo" placeholder="Fluorophore" required/>
+                <input class="text-input" type="text" name="fluo" id="fluo" placeholder="Fluorophore" required/>
             </div>
-            <div>
+            <div class="input-container">
                 <label for="catalogue"># de Catalogue</label>
                 <br>
-                <input type="text" name="catalogue" id="catalogue" placeholder="# de Catalogue" required/>
+                <input class="text-input" type="text" name="catalogue" id="catalogue" placeholder="# de Catalogue" required/>
             </div>
-            <div>
+            <div class="input-container">
                 <label for="fournisseur">Nom du Fournisseur</label>
                 <br>
-                <input type="text" name="fournisseur" id="fournisseur" placeholder="Nom du Fournisseur" required/>
+                <input class="text-input" type="text" name="fournisseur" id="fournisseur" placeholder="Nom du Fournisseur" required/>
             </div>
-            <div>
+            <div class="input-container">
                 <label for="volume">Volume initial (uL)</label>
                 <br>
-                <input type="text" name="volume" id="volume" placeholder="Volume initial" required/>
+                <input class="text-input" type="text" name="volume" id="volume" placeholder="Volume initial" required/>
             </div>
-            <div>
+            <div class="input-container">
                 <label for="restant">Volume restant (uL)</label>
                 <br>
-                <input type="text" name="restant" id="restant" placeholder="Volume initial" required/>
+                <input class="text-input" type="text" name="restant" id="restant" placeholder="Volume initial" required/>
             </div>
-            <div>
+            <div class="input-container">
                 <label for="submit"></label>
                 <br>
-                <input type="submit" name="submit" id="submit"/>
+                <input type="submit" name="submit" id="add-btn" value="Ajouter"/>
             </div>
         </form>
     </div>

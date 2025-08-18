@@ -40,8 +40,8 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
 <body>
 <h1>Inventaire-App</h1>
 <header>
-    <div>
-        <h3><a href="../index.php">Inventaire-App</a></h3>
+    <div id="main-title">
+        <h2><a href="../index.php">Inventaire-App</a></h2>
     </div>
     <nav>
         <ul>
@@ -61,10 +61,10 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 </header>
 <main>
-    <div>
+    <div id="modify-title-container">
         <h2>Modifier un anticorps</h2>
     </div>
-    <div>
+    <div class="form-container">
         <form action="#" method="post">
             <div>
                 <?php
@@ -72,10 +72,10 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                 if ($select_result === FALSE) {
                     echo "Erreur de la requête SQL : " . $db->error;
                 } elseif (count($rows) > 0) {
+                    echo "<div class='input-container'>";
                     echo "<label for='ab-name'>Nom de l'anticorps</label>";
                     echo "<br>";
-                    echo "<select name='ab-name' id='ab-name' required>";
-
+                    echo "<select class='select-input' name='ab-name' id='ab-name' required>";
 
                     foreach ($rows as $row) {
                         $value = htmlspecialchars($row['NomAnticorps']);
@@ -83,9 +83,11 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                     }
 
                     echo '</select><br><br>';
+                    echo "</div>";
+                    echo "<div class='input-container'>";
                     echo "<label for='fluo'>Fluorophore</label>";
                     echo "<br>";
-                    echo "<select name='fluo' id='fluo' required>";
+                    echo "<select class='select-input' name='fluo' id='fluo' required>";
 
                     foreach ($rows as $row) {
                         $value_fluo = htmlspecialchars($row['Fluorophore']);
@@ -93,9 +95,12 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                     }
 
                     echo '</select><br><br>';
+                    echo "</div>";
+                    echo "<div class='input-container'>";
                     echo '<label for="volume-used">Volume restant (uL)</label>';
                     echo '<br>';
-                    echo '<input type="text" name="volume-used" id="volume-used" placeholder="Volume restant" required/>';
+                    echo '<input class="text-input" type="text" name="volume-used" id="volume-used" placeholder="Volume restant" required/>';
+                    echo "</div>";
                 } else {
                     echo "Aucun anticorps trouvé dans la table";
                 }
@@ -103,10 +108,10 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                 $db = null;
                 ?>
             </div>
-            <div>
+            <div class='input-container'>
                 <label for="submit"></label>
                 <br>
-                <input type="submit" name="submit" id="submit"/>
+                <input type="submit" name="submit" id="modify-btn" value="Modifier"/>
             </div>
         </form>
     </div>

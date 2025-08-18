@@ -11,8 +11,8 @@
 <body>
 <h1>Inventaire-App</h1>
 <header>
-    <div>
-        <h3><a href="../index.php">Inventaire-App</a></h3>
+    <div id="main-title">
+        <h2><a href="../index.php">Inventaire-App</a></h2>
     </div>
     <nav>
         <ul>

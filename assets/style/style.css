@@ -1,7 +1,11 @@
+/* GÉNÉRAL */
 
 :root {
-    --black: #000;
-    --white: #fff;
+    --black: #0D141C;
+    --white: #F8FAFC;
+    --gray: #E7EDF4;
+    --blue: #0C7FF2;
+    --green: #388B83;
 }
 
 * {
@@ -13,6 +17,7 @@ body {
     margin: 0;
     padding: 0;
     font: 400 100%/150% "Lato", sans-serif !important;
+    background-color: var(--white);
 }
 
 h1 {
@@ -23,12 +28,18 @@ h2, h3 {
     font-family: "Open Sans", sans-serif !important;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+}
+
 ul {
     list-style: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 40rem;
+    padding-left: 40rem;
+    padding-top: 2rem;
 }
 
 li {
@@ -47,12 +58,40 @@ main {
     min-height: 73vh;
 }
 
-#main-title {
+header {
+    border-bottom: solid rgba(13, 20, 28, 0.5) 0.1rem;
+}
+
+#main-title h2 {
+    display: inline-block;
+    padding-top: 1rem;
+}
+
+#foot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 2rem;
 }
 
+.foot-item {
+    margin-right: 1rem;
+}
+
+#foot a {
+    max-width: 2rem;
+    margin-bottom: 0.9rem;
+}
+
+#foot a img {
+    max-width: 100%;
+}
+
+/* INDEX.PHP */
+
+
 #hero-banner {
-    margin-top: 2rem;
+    margin-top: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,6 +104,12 @@ main {
     align-items: center;
 }
 
+#ab-image {
+    max-width: 35%;
+    height: auto;
+    border-radius: 1rem;
+}
+
 #inventory-button {
     margin-top: 2rem;
     display: flex;
@@ -72,12 +117,135 @@ main {
     align-items: center;
 }
 
-#foot {
+#inventory-button a {
+    padding: 1rem 2rem;
+    background-color: var(--blue);
+    border-radius: 1rem;
+    border: none;
+    transition: transform 0.3s;
+}
+
+#inventory-button a:hover {
+    transform: scale(1.2);
+}
+
+/* LISTE.PHP */
+
+#list-title-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 45rem;
+    margin-top: 4rem;
 }
 
-.foot-item {
-    margin-right: 1rem;
+#ab-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+#ab-table table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: solid var(--gray) 0.1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+#ab-table th,
+#ab-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 2rem;
+    border: solid var(--gray) 0.1rem;
+}
+
+#list-title-container a {
+    padding: 0.5rem 1rem;
+    background-color: var(--blue);
+    border-radius: 0.5rem;
+    border: none;
+    transition: transform 0.3s;
+}
+
+#list-title-container a:hover {
+    transform: scale(1.2);
+}
+
+/* AJOUTER.PHP */
+
+#add-title-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 4rem;
+    margin-left: 30rem;
+}
+
+.form-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 4rem;
+    margin-left: 30rem;
+}
+
+.input-container {
+    margin: 0.5rem;
+}
+
+.input-container label {
+    margin-bottom: 0.3rem;
+}
+
+.input-container .text-input {
+    padding: 0.5rem;
+    border: solid var(--gray) 0.1rem;
+    border-radius: 0.5rem;
+}
+
+#add-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--blue);
+    border-radius: 1rem;
+    border: none;
+    transition: transform 0.3s;
+}
+
+#add-btn:hover {
+    transform: scale(1.2);
+}
+
+/* MODIFIER.PHP */
+
+#modify-title-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 4rem;
+    margin-left: 30rem;
+}
+
+.input-container #ab-name {
+    min-width: 15rem;
+}
+
+.input-container .select-input {
+    padding: 0.5rem;
+    border: solid var(--gray) 0.1rem;
+    border-radius: 0.5rem;
+}
+
+#modify-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--blue);
+    border-radius: 1rem;
+    border: none;
+    transition: transform 0.3s;
+}
+
+#modify-btn:hover {
+    transform: scale(1.2);
 }
