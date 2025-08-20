@@ -32,20 +32,13 @@
     </nav>
 </header>
 <main>
-    <p style="color: green;">Action réalisée avec succès !</p>
-    <button><a href="./liste.php">Revenir à la liste</a></button>
+    <div class="container">
+        <h4>Action réalisée avec succès !</h4>
+        <a class="btn" href="./liste.php">Revenir à la liste</a>
+    </div>
 </main>
-<footer>
-    <div>
-        copyright CAF @ 2025
-    </div>
-    <div>
-        Mon github
-        <div>
-            <img src="#" alt="github">
-        </div>
-    </div>
-</footer>
-</body>
-</html>
+<?php
+
+require_once "../partials/_footer.php";
+?>
 

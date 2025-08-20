@@ -59,10 +59,10 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 </header>
 <main>
-    <div>
+    <div id="delete-title-container">
         <h2>Supprimer un anticorps</h2>
     </div>
-    <div>
+    <div class="form-container">
         <form action="#" method="post">
             <div>
                 <?php
@@ -70,9 +70,10 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                 if ($select_result === FALSE) {
                     echo "Erreur de la requête SQL : " . $db->error;
                 } elseif (count($rows) > 0) {
+                    echo "<div class='input-container'>";
                     echo "<label for='ab-name'>Nom de l'anticorps</label>";
                     echo "<br>";
-                    echo "<select name='ab-name' id='ab-name' required>";
+                    echo "<select class='select-input' name='ab-name' id='ab-name' required>";
 
 
                     foreach ($rows as $row) {
@@ -81,15 +82,18 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                     }
 
                     echo '</select><br><br>';
+                    echo "</div>";
+                    echo "<div class='input-container'>";
                     echo "<label for='fluo'>Fluorophore</label>";
                     echo "<br>";
-                    echo "<select name='fluo' id='fluo' required>";
+                    echo "<select class='select-input' name='fluo' id='fluo' required>";
 
                     foreach ($rows as $row) {
                         $value_fluo = htmlspecialchars($row['Fluorophore']);
                         echo "<option value=\"$value_fluo\">$value_fluo</option>";
                     }
                     echo '</select><br><br>';
+                    echo "<br>";
                 } else {
                     echo "Aucun anticorps trouvé dans la table";
                 }
@@ -97,10 +101,10 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
                 $db = null;
                 ?>
             </div>
-            <div>
+            <div class='input-container'>
                 <label for="submit"></label>
                 <br>
-                <input type="submit" name="submit" id="submit"/>
+                <input type="submit" name="submit" id="delete-btn" value="Supprimer"/>
             </div>
         </form>
     </div>

@@ -38,7 +38,7 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 40rem;
+    padding-left: 35rem;
     padding-top: 2rem;
 }
 
@@ -64,7 +64,8 @@ header {
 
 #main-title h2 {
     display: inline-block;
-    padding-top: 1rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 #foot {
@@ -119,6 +120,7 @@ header {
 
 #inventory-button a {
     padding: 1rem 2rem;
+    color: var(--white);
     background-color: var(--blue);
     border-radius: 1rem;
     border: none;
@@ -164,6 +166,7 @@ header {
 
 #list-title-container a {
     padding: 0.5rem 1rem;
+    color: var(--white);
     background-color: var(--blue);
     border-radius: 0.5rem;
     border: none;
@@ -188,12 +191,13 @@ header {
     display: flex;
     justify-content: left;
     align-items: center;
-    margin-top: 4rem;
+    margin-top: 2rem;
     margin-left: 30rem;
 }
 
 .input-container {
-    margin: 0.5rem;
+    margin: 1rem 0.5rem;
+    max-height: 4.5rem;
 }
 
 .input-container label {
@@ -208,6 +212,7 @@ header {
 
 #add-btn {
     padding: 0.5rem 1rem;
+    color: var(--white);
     background-color: var(--blue);
     border-radius: 1rem;
     border: none;
@@ -240,6 +245,7 @@ header {
 
 #modify-btn {
     padding: 0.5rem 1rem;
+    color: var(--white);
     background-color: var(--blue);
     border-radius: 1rem;
     border: none;
@@ -249,3 +255,58 @@ header {
 #modify-btn:hover {
     transform: scale(1.2);
 }
+
+/* SUPPRIMER.PHP */
+
+#delete-title-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 4rem;
+    margin-left: 30rem;
+}
+
+#delete-btn {
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    background-color: var(--blue);
+    border-radius: 1rem;
+    border: none;
+    transition: transform 0.3s;
+}
+
+#delete-btn:hover {
+    transform: scale(1.2);
+}
+
+/* SUCCESS.PHP */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container h4 {
+    margin-top: 10rem;
+    color: var(--green);
+}
+
+.container a {
+    margin-top: 4rem;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    background-color: var(--blue);
+    border-radius: 1rem;
+    border: none;
+    transition: transform 0.3s;
+}
+
+.container a:hover {
+    transform: scale(1.2);
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+
