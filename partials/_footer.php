@@ -5,6 +5,7 @@
         <a href="https://github.com/CAF2801"><img class="foot-item" src="../assets/img/github-svgrepo-com.svg" alt="github"></a>
     </div>
 </footer>
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
 
