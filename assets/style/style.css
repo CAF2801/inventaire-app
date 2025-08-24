@@ -29,11 +29,53 @@ h2, h3 {
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    position: relative;
     border-bottom: solid rgba(13, 20, 28, 0.5) 0.1rem;
 }
 
-nav ul {
+#menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
 
+#hamburger {
+    max-width: 10%;
+    margin: 0.5rem;
+    padding: 0.2rem;
+    border: solid 0.1rem var(--black);
+}
+
+#hamburger:hover {
+    background-color: var(--gray);
+}
+
+#hamburger.background {
+    background-image: url("/assets/img/cross-mark-button-svgrepo-com.png");
+}
+
+#menu.open {
+    display: flex;
+    border: solid 0.1rem var(--black);
+}
+
+#menu.open ul {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+#menu.open li {
+    padding: 1rem;
+}
+
+#menu.open li:hover {
+    background-color: var(--gray);
 }
 
 nav ul li {
@@ -78,20 +120,21 @@ main {
     max-width: 100%;
 }
 
-@media screen and (min-width: 1200px) {
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-    }
+@media screen and (min-width: 1024px) {
 
     #main-title h2 {
         margin: auto 1rem;
         padding: 1.5rem;
     }
 
-    nav {
+    #menu {
+        display: flex!important;
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        border: none;
+        width: auto;
+        justify-content: flex-end;
         padding-top: 1rem;
     }
 
@@ -108,7 +151,7 @@ main {
     }
 
     nav ul li a {
-        padding: 2rem 1rem;
+        padding: 2rem 2rem;
     }
 
     nav ul li a:hover {

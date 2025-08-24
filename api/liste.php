@@ -27,19 +27,20 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     <div id="main-title">
         <h2><a href="../index.php">Inventaire-App</a></h2>
     </div>
-    <nav>
+    <img id="hamburger" src="../assets/img/hamburger-md-svgrepo-com.png" alt="hamburger-menu">
+    <nav id="menu">
         <ul>
             <li>
-                <a href="./liste.php">Liste d'anticorps</a>
+                <a href="../api/liste.php">Liste</a>
             </li>
             <li>
-                <a href="./ajouter.php">Ajouter un anticorps</a>
+                <a href="../api/ajouter.php">Ajouter</a>
             </li>
             <li>
-                <a href="./modifier.php">Modifier un anticorps</a>
+                <a href="../api/modifier.php">Modifier</a>
             </li>
             <li>
-                <a href="./supprimer.php">Supprimer un anticorps</a>
+                <a href="../api/supprimer.php">Supprimer</a>
             </li>
         </ul>
     </nav>
