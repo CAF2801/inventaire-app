@@ -45,7 +45,7 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
         </ul>
     </nav>
 </header>
-<main>
+<main class="api">
     <div id="list-title-container">
         <h2>Liste d'anticorps</h2>
         <a href="./ajouter.php">Ajouter un anticorps</a>
@@ -94,7 +94,13 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
    ?>
     </div>
 </main>
-<?php
-
-require_once "../partials/_footer.php";
-?>
+<footer>
+    <div id="foot">
+        <p class="foot-item">copyright CAF @ 2025</p>
+        <p class="foot-item">Mon github</p>
+        <a href="https://github.com/CAF2801"><img class="foot-item" src="../assets/img/github-svgrepo-com.svg" alt="github"></a>
+    </div>
+</footer>
+<script src="../assets/js/main-api.js"></script>
+</body>
+</html>
