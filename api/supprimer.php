@@ -8,14 +8,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $ab_name = $_POST['ab-name'];
     $fluo = $_POST['fluo'];
 
-
-    $new_delete_query = $db->prepare('DELETE FROM antibody  WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
-    $new_delete_query->execute([
+    $check_query = $db->prepare("SELECT NomAnticorps, Fluorophore FROM antibody WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore");
+    $check_query->execute([
         'NomAnticorps' => $ab_name,
-        'Fluorophore' => $fluo]);
+        'Fluorophore' => $fluo
+    ]);
 
-    header('Location: success.php');
+    $result = $check_query->fetch(PDO::FETCH_ASSOC);
+
+    if ($result) {
+        $new_delete_query = $db->prepare('DELETE FROM antibody  WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
+        $new_delete_query->execute([
+            'NomAnticorps' => $ab_name,
+            'Fluorophore' => $fluo]);
+
+        header('Location: success.php');
+    } else {
+        header('Location: error.php');
+    }
     exit;
+
 }
 
 $sql_select = "SELECT NomAnticorps, Fluorophore FROM antibody";

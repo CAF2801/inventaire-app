@@ -79,6 +79,7 @@ nav ul li {
 }
 
 a {
+    color: var(--black);
     text-decoration: none;
 }
 
@@ -130,6 +131,7 @@ main {
         display: flex!important;
         position: static;
         flex-direction: row;
+        background-color: var(--white);
         background: transparent;
         border: none;
         width: auto;
@@ -408,4 +410,8 @@ section {
     background-color: var(--blue);
 }
 
+/* ERROR.PHP */
 
+#error {
+    color: red!important;
+}

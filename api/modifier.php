@@ -9,15 +9,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $fluo = $_POST['fluo'];
     $volume_used = $_POST['volume-used'];
 
+    $check_query = $db->prepare("SELECT NomAnticorps, Fluorophore FROM antibody WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore");
+    $check_query->execute([
+            'NomAnticorps' => $ab_name,
+            'Fluorophore' => $fluo
+    ]);
 
-    $new_update_query = $db->prepare('UPDATE antibody SET VolumeRestant = :VolumeRestant WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
-    $new_update_query->execute([
-        'NomAnticorps' => $ab_name,
-        'Fluorophore' => $fluo,
-        'VolumeRestant' => $volume_used]);
+    $result = $check_query->fetch(PDO::FETCH_ASSOC);
 
-    header('Location: success.php');
+    if ($result) {
+        $new_update_query = $db->prepare('UPDATE antibody SET VolumeRestant = :VolumeRestant WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
+        $new_update_query->execute([
+            'NomAnticorps' => $ab_name,
+            'Fluorophore' => $fluo,
+            'VolumeRestant' => $volume_used]);
+
+        header('Location: success.php');
+    } else {
+        header('Location: error.php');
+    }
     exit;
+
+
 }
 
 $sql_select = "SELECT NomAnticorps, Fluorophore FROM antibody";
