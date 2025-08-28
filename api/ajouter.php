@@ -14,6 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $volume = $_POST['volume'];
     $restant = $_POST['restant'];
 
+if (!is_numeric($volume || $restant) || $volume || $restant < 0) {
+    header('Location: error.php?message=volume_invalide');
+    exit;
+}
     $newAbQuery = $db->prepare('INSERT INTO antibody (NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant) VALUES (:NomAnticorps, :Fluorophore, :NuméroCatalogue, :Fournisseur, :VolumeInitial, :VolumeRestant)');
     $newAbQuery->execute([
             'NomAnticorps' => $ab_name,

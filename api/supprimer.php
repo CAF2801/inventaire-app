@@ -20,21 +20,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         $new_delete_query = $db->prepare('DELETE FROM antibody  WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
         $new_delete_query->execute([
             'NomAnticorps' => $ab_name,
-            'Fluorophore' => $fluo]);
+            'Fluorophore' => $fluo
+        ]);
 
-        header('Location: success.php');
+        if ($new_delete_query->rowCount() > 0) {
+            header('Location: success.php');
+        } else {
+            header('Location: error.php?message=update_echec');
+        }
     } else {
-        header('Location: error.php');
+        header('Location: error.php?message=association_incorrecte');
     }
     exit;
 
 }
 
 $sql_select = "SELECT NomAnticorps, Fluorophore FROM antibody";
-
-$select_result = $db->query($sql_select);
-
-$rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
+$select_stmt = $db->prepare($sql_select);
+$select_stmt->execute();
+$rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -80,7 +84,7 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
             <div>
                 <?php
 
-                if ($select_result === FALSE) {
+                if ($select_stmt === FALSE) {
                     echo "Erreur de la requête SQL : " . $db->error;
                 } elseif (count($rows) > 0) {
                     echo "<div class='input-container'>";

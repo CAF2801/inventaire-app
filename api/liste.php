@@ -4,11 +4,10 @@ require_once "../data/connect.php";
 
 global $db;
 
-$sql = "SELECT id, NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant FROM antibody";
-
-$result = $db->query($sql);
-
-$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+$select_query = "SELECT id, NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant FROM antibody";
+$select_stmt = $db->prepare($select_query);
+$select_stmt->execute();
+$rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -52,8 +51,8 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     </div>
     <div id="ab-table">
     <?php
-    global $result;
-    if ($result === FALSE) {
+    global $rows;
+    if ($rows === FALSE) {
         echo "Erreur de la requête SQL : " . $db->error;
     } elseif (count($rows) > 0) {
         echo "<table>";
@@ -89,7 +88,7 @@ $rows = $result->fetchAll(PDO::FETCH_ASSOC);
     } else {
         echo "Aucun anticorps trouvé dans la table";
     }
-    $result = null;
+    $rows = null;
     $db = null;
    ?>
     </div>

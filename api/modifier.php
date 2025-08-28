@@ -9,6 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $fluo = $_POST['fluo'];
     $volume_used = $_POST['volume-used'];
 
+    if (!is_numeric($volume_used) || $volume_used < 0) {
+        header('Location: error.php?message=volume_invalide');
+        exit;
+    }
+
     $check_query = $db->prepare("SELECT NomAnticorps, Fluorophore FROM antibody WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore");
     $check_query->execute([
             'NomAnticorps' => $ab_name,
@@ -22,11 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         $new_update_query->execute([
             'NomAnticorps' => $ab_name,
             'Fluorophore' => $fluo,
-            'VolumeRestant' => $volume_used]);
+            'VolumeRestant' => $volume_used
+        ]);
 
-        header('Location: success.php');
+        if ($new_update_query->rowCount() > 0) {
+            header('Location: success.php');
+        } else {
+            header('Location: error.php?message=update_echec');
+        }
     } else {
-        header('Location: error.php');
+        header('Location: error.php?message=association_incorrecte');
     }
     exit;
 
@@ -34,10 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 }
 
 $sql_select = "SELECT NomAnticorps, Fluorophore FROM antibody";
-
-$select_result = $db->query($sql_select);
-
-$rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
+$select_stmt = $db->prepare($sql_select);
+$select_stmt->execute();
+$rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -83,7 +92,7 @@ $rows = $select_result->fetchAll(PDO::FETCH_ASSOC);
             <div>
                 <?php
 
-                if ($select_result === FALSE) {
+                if ($select_stmt === FALSE) {
                     echo "Erreur de la requête SQL : " . $db->error;
                 } elseif (count($rows) > 0) {
                     echo "<div class='input-container'>";
