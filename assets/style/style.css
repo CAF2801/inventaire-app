@@ -43,6 +43,8 @@ header {
     position: absolute;
     top: 100%;
     left: 0;
+    background-color: var(--white);
+    z-index: 1000;
 }
 
 #hamburger {
