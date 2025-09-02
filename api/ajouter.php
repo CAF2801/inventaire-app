@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $volume = $_POST['volume'];
     $restant = $_POST['restant'];
 
-if (!is_numeric($volume || $restant) || $volume || $restant < 0) {
+if (!is_numeric($volume) || $volume < 0) {
     header('Location: error.php?message=volume_invalide');
     exit;
 }
@@ -30,8 +30,6 @@ if (!is_numeric($volume || $restant) || $volume || $restant < 0) {
     header('Location: success.php');
     exit;
 }
-
-
 
 ?>
 
