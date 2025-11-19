@@ -1,49 +1,19 @@
 <?php
 
-require_once "../data/connect.php";
+    require_once "../data/connect.php";
 
-global $db;
+    global $db;
 
-$select_query = "SELECT id, NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant FROM antibody";
-$select_stmt = $db->prepare($select_query);
-$select_stmt->execute();
-$rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $select_query = "SELECT id, NomAnticorps, Fluorophore, NuméroCatalogue, Fournisseur, VolumeInitial, VolumeRestant FROM antibody";
+    $select_stmt = $db->prepare($select_query);
+    $select_stmt->execute();
+    $rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    require_once "../partials/_header.php";
+
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventaire-app</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/style/style.css" media="screen">
-</head>
-<body>
-<h1>Inventaire-App</h1>
-<header>
-    <div id="main-title">
-        <h2><a href="../index.php">Inventaire-App</a></h2>
-    </div>
-    <img id="hamburger" src="../assets/img/hamburger-md-svgrepo-com.png" alt="hamburger-menu">
-    <nav id="menu">
-        <ul>
-            <li>
-                <a href="../api/liste.php">Liste</a>
-            </li>
-            <li>
-                <a href="../api/ajouter.php">Ajouter</a>
-            </li>
-            <li>
-                <a href="../api/modifier.php">Modifier</a>
-            </li>
-            <li>
-                <a href="../api/supprimer.php">Supprimer</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+
 <main class="api">
     <div id="list-title-container">
         <h2>Liste d'anticorps</h2>
@@ -93,13 +63,8 @@ $rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
    ?>
     </div>
 </main>
-<footer>
-    <div id="foot">
-        <p class="foot-item">copyright CAF @ 2025</p>
-        <p class="foot-item">Mon github</p>
-        <a href="https://github.com/CAF2801"><img class="foot-item" src="../assets/img/github-svgrepo-com.svg" alt="github"></a>
-    </div>
-</footer>
-<script src="../assets/js/main-api.js"></script>
-</body>
-</html>
+
+<?php
+    require_once "../partials/_footer.php";
+?>
+
