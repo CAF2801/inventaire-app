@@ -258,6 +258,35 @@ section {
     border: solid var(--gray) 0.1rem;
 }
 
+.cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    width: 7rem;
+    padding: 0.5rem 1rem;
+    color: var(--white);
+    background-color: var(--blue);
+    border-radius: 0.5rem;
+    border: none;
+    transition: transform 0.3s;
+    margin: 0.2rem 0;
+    text-align: center;
+}
+
+.btn:hover {
+    transform: scale(1.2);
+    background-color: var(--blue);
+}
+
+.btn:visited {
+    color: var(--white);
+}
+
 #list-title-container a {
     padding: 0.5rem 1rem;
     color: var(--white);

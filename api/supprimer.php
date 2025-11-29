@@ -3,42 +3,54 @@
 require_once "../data/connect.php";
 
 global $db;
+$item_data = null;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+
+    $id_item = filter_input(INPUT_POST, 'id_item', FILTER_VALIDATE_INT);
     $ab_name = $_POST['ab-name'];
     $fluo = $_POST['fluo'];
 
-    $check_query = $db->prepare("SELECT NomAnticorps, Fluorophore FROM antibody WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore");
-    $check_query->execute([
-        'NomAnticorps' => $ab_name,
-        'Fluorophore' => $fluo
+    if (!$id_item) {
+        header('Location: error.php?message=donnees_invalides');
+        exit;
+    }
+    $new_delete_query = $db -> prepare(
+            'DELETE FROM antibody WHERE id = :id'
+    );
+
+    $new_delete_query -> execute([
+            'id' => $id_item
     ]);
 
-    $result = $check_query->fetch(PDO::FETCH_ASSOC);
-
-    if ($result) {
-        $new_delete_query = $db->prepare('DELETE FROM antibody  WHERE NomAnticorps = :NomAnticorps AND Fluorophore = :Fluorophore');
-        $new_delete_query->execute([
-            'NomAnticorps' => $ab_name,
-            'Fluorophore' => $fluo
-        ]);
-
-        if ($new_delete_query->rowCount() > 0) {
-            header('Location: /api/message/success.php');
-        } else {
-            header('Location: /api/message/error.php?message=update_echec');
-        }
+    if ($new_delete_query->rowCount() > 0) {
+        header('Location: /api/message/success.php?action=modification');
     } else {
-        header('Location: /api/message/error.php?message=association_incorrecte');
+        header('Location: /api/message/success.php?action=pas_de_changement');
     }
     exit;
-
 }
 
-    $sql_select = "SELECT NomAnticorps, Fluorophore FROM antibody";
+$id_a_supprimer = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+if ($id_a_supprimer) {
+
+    $sql_select = "SELECT id, NomAnticorps, Fluorophore FROM antibody WHERE id = :id";
     $select_stmt = $db->prepare($sql_select);
-    $select_stmt->execute();
-    $rows = $select_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $select_stmt->execute([
+            'id' => $id_a_supprimer
+    ]);
+    $item_data = $select_stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$item_data) {
+        header('Location: error.php?message=id_non_trouve');
+        exit;
+    }
+} else {
+
+    $item_data = false;
+
+}
 
     require_once "../partials/_header.php";
 
@@ -53,45 +65,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             <div>
                 <?php
 
-                if ($select_stmt === FALSE) {
-                    echo "Erreur de la requête SQL : " . $db->error;
-                } elseif (count($rows) > 0) {
-                    echo "<div class='input-container'>";
-                    echo "<label for='ab-name'>Nom de l'anticorps</label>";
-                    echo "<br>";
-                    echo "<select class='select-input' name='ab-name' id='ab-name' required>";
+                    if ($item_data) {
 
+                        echo '<input type="hidden" name="id_item" value="' . htmlspecialchars($item_data['id']) . '">';
 
-                    foreach ($rows as $row) {
-                        $value = htmlspecialchars($row['NomAnticorps']);
-                        echo "<option value=\"$value\">$value</option>";
-                    }
+                        echo "<div class='input-container'>";
+                        echo "<label for='ab-name'>Nom de l'anticorps</label>";
+                        echo "<br>";
+                        echo '<input class="text-input" type="text" name="ab-name" id="ab-name" required value="' . htmlspecialchars($item_data['NomAnticorps']) . '"/>';
+                        echo "</div>";
 
-                    echo '</select><br><br>';
-                    echo "</div>";
-                    echo "<div class='input-container'>";
-                    echo "<label for='fluo'>Fluorophore</label>";
-                    echo "<br>";
-                    echo "<select class='select-input' name='fluo' id='fluo' required>";
-
-                    foreach ($rows as $row) {
-                        $value_fluo = htmlspecialchars($row['Fluorophore']);
-                        echo "<option value=\"$value_fluo\">$value_fluo</option>";
-                    }
-                    echo '</select><br><br>';
-                    echo "<br>";
-                } else {
-                    echo "Aucun anticorps trouvé dans la table";
+                         echo "<div class='input-container'>";
+                        echo "<label for='fluo'>Fluorophore</label>";
+                        echo "<br>";
+                        echo '<input class="text-input" type="text" name="fluo" id="fluo" required value="' . htmlspecialchars($item_data['Fluorophore']) . '"/>';
+                        echo "</div>";
+                    } else {
+                    echo "Impossible d'afficher le formulaire de suppression. Veuillez sélectionner un anticorps depuis la liste.";
                 }
 
                 $db = null;
                 ?>
             </div>
-            <div class='input-container'>
-                <label for="submit"></label>
-                <br>
-                <input type="submit" name="submit" id="delete-btn" value="Supprimer"/>
-            </div>
+
+            <?php if($item_data): ?>
+                <div class='input-container'>
+                    <label for="submit"></label>
+                    <br>
+                    <input type="submit" name="submit" id="delete-btn" value="Supprimer"/>
+                </div>
+            <?php endif; ?>
         </form>
     </div>
 </main>

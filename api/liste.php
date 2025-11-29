@@ -50,6 +50,10 @@
             echo "<td>" . htmlspecialchars($row['Fournisseur']) . "</td>";
             echo "<td>" . htmlspecialchars($row['VolumeInitial']) . "</td>";
             echo "<td>" . htmlspecialchars($row['VolumeRestant']) . "</td>";
+            echo "<td class='cell'>
+                    <a href=\"./modifier.php?id=" . htmlspecialchars($row['id']) . "\" class='btn'>Modifier</a>
+                    <a href=\"./supprimer.php?id=" . htmlspecialchars($row['id']) . "\" class='btn'>Supprimer</a>
+                  </td>";
             echo "</tr>";
         }
         echo "</tbody>";
